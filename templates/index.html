@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/helpers.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript" charset="utf-8"></script>
+
+  </head>
+  <body>
+
+    <section id="splash" class="scene">
+      <h1>Ninja Buzz</h1>
+    </section>
+
+    <section id="scene-a" class="scene hidden">
+      <h1>Where do you live?</h1>
+      <input type="" />
+    </section>
+
+    <section id="scene-b" class="scene hidden">
+      <h1>Select things below that you like plox!</h1>
+      <div id="tags"></div>
+      <div id="refresh-tags">Refresh</div>
+      <div id="randomize-tags">Randomize</div>
+      <div id="goto-c">Next</div>
+    </section>
+
+    <section id="scene-c" class="scene hidden">
+      <h1>What looks like something you would like to do today?</h1>
+    </section>
+
+    <section id="scene-d" class="scene hidden">
+      <h1>Here's a map of your itinerary</h1>
+    </section>
+
+    <footer>
+    </footer>
+
+
+  </body>
+</html>
