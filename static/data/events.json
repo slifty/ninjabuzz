@@ -2,106 +2,116 @@
 	{
 		"text": "A Hippopotamus declares that you’re frightfully rude",
 		"icon": "hippo.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "hippo"
 	},
 	{
 		"text": "A ghost decides to haunt you for your foreseeable future",
 		"icon": "ghost.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "ghost"
 	},
 	{
 		"text": "You encounter a giraffe. He looks down on you",
 		"icon": "giraffe.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "giraffe"
 	},
 	{
 		"text": "You just found the world’s undisputed, all time, bestest brunch",
 		"icon": "brunch.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "brunch"
 	},
 	{
 		"text": "You see all your friends…they met up without you…sad face",
 		"icon": "sad_face.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "sad_face"
 	},
 	{
 		"text": "A garda starts twerking up against you",
 		"icon": "awkward.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "awkward"
 	},
 	{
 		"text": "You find a mirror, it reveals that you’re looking gooood!",
 		"icon": "mirror.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "mirror"
 	},
 	{
 		"text": "You step in Dinosaur poo, AGAIN!",
 		"icon": "dinosaur.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "dinosaur"
 	},
 	{
 		"text": "You learn to fly! and then immediately forget",
 		"icon": "super.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "super"
 	},
 	{
 		"text": "You find a pot of gold…they have chocolate inside",
 		"icon": "gold.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "gold"
 	},
 	{
 		"text": "You meet Harrison Ford, he likes your socks",
 		"icon": "sock.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "sock"
 	},
 	{
 		"text": "You forget how to turn left",
 		"icon": "left.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "left"
 	},
 	{
 		"text": "You enter backwards walking mode",
 		"icon": "back.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "back"
 	},
 	{
 		"text": "You have only one leg left. Let the Hopathon begin!",
 		"icon": "bunny.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "bunny"
 	},
 	{
 		"text": "A bus made of marshmallows runs over your foot. It tickles.",
 		"icon": "marsh.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "marsh"
 	},
 	{
 		"text": "You are a Viking, PILLAGE!",
 		"icon": "viking.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "viking"
 	},
 	{
 		"text": "Nobody can see you!!…Nobody.Can.See.You…",
 		"icon": "invisible_man.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "invisible_man"
 	},
 	{
 		"text": "You find Monopoly money, its not very useful",
 		"icon": "note.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "note"
 	},
 	{
 		"text": "You bite your tongue, it tastes like liquorice",
 		"icon": "tongue.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "tongue"
 	},
 	{
 		"text": "The streets are underwater, swim like a fish",
 		"icon": "fish.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "fish"
 	},
 	{
 		"text": "You meet Bob, you don’t know who Bob is",
 		"icon": "question.png",
-		"sound": "file_name_of_sound.mp3"
+		"sound": "question"
+	},
+	{
+		"text": "It starts raining men, kind of sore",
+		"icon": "rain.png",
+		"sound": "rain"
+	},
+	{
+		"text": "You kiss a girl and you like it",
+		"icon": "ewww.png",
+		"sound": "ewww"
 	}
 ]

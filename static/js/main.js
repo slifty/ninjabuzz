@@ -2,7 +2,7 @@ $(function() {
 
 	/* Universal instance variables */
 	var available_tags = []; // The complete list of all possible tags
-	var available_tags = []; // The complete list of all possible tags
+	var selected_tags = []; // The selected list of tags
 
 	var available_venues = []; // The complete list of all possible venues
 	var selected_venues = [] // The list of venues the user is choosing to use
@@ -34,7 +34,7 @@ $(function() {
 			 	available_events = data;
 			})
 		).done(function(data) {
-		 	sceneD();
+		 	sceneA();
 		});
 	}
 
@@ -276,6 +276,9 @@ $(function() {
 			var event_threshold = 500; // How many heartbeats until events are guaranteed
 			var event_allowed = true; // is an event allowed right now
 
+			var tweet_probability = 0; // How likely is an event
+			var tweet_threshold = 300; // How many heartbeats until events are guaranteed
+
 			// Set up the clock
 			var $clock = $("#clock");
 
@@ -287,12 +290,12 @@ $(function() {
 			var map = L.map('map', {attributionControl: false}).setView([
 					location.A, // default lat
 					location.k // default lon
-				], 15); // default zoom level
+				], 17); // default zoom level
 
 
 			L.tileLayer('http://{s}.tiles.mapbox.com/v3/gabriel-florit.map-s24tp6w4/{z}/{x}/{y}.png', {
-				minZoom: 12,
-				maxZoom: 15
+				minZoom: 13,
+				maxZoom: 17
 			}).addTo(map);
 
 			// Prepare the timeline
@@ -505,12 +508,22 @@ $(function() {
 
 				// Figure out events
 				event_probability++;
+				tweet_probability++;
 				event_rng = Math.random() * event_threshold;
+				tweet_rng = Math.random() * tweet_threshold;
 				if(event_probability > event_rng && event_allowed) {
 					// AN EVENT!
 					event_probability = 0;
-					trigger_event(selected_events.pop())
+					trigger_event(selected_events.pop());
 				}
+
+				if(tweet_probability > tweet_rng && event_allowed) {
+					// AN EVENT!
+					tweet_probability = 0;
+					console.log("TWEET");
+					load_tweet();
+				}
+
 
 				heartbeat = setTimeout(function() { map.whenReady(function() {
 					requestAnimationFrame(function() {
@@ -525,12 +538,11 @@ $(function() {
 					var icon = "/static/event_assets/icons/" + e.icon;
 					var sound = "/static/event_assets/sounds/" + e.sound;
 
-					sound = "/static/event_assets/sounds/boo";
-
 					event_allowed = false;
 					setTimeout(
 						function() {
 							event_allowed = true;
+							event_probability = 0;
 							renderNarrative("");
 						},
 						15000
@@ -552,6 +564,36 @@ $(function() {
 					L.marker(currPoint, {icon: icon}).addTo(map).bindPopup(text);
 				}
 
+			}
+
+			function load_tweet() {
+				var keyword = getRandomSubarray(selected_tags, 1);
+				console.log(currPoint);
+				$.ajax({
+					url: "/twittersearch",
+					type: "get",
+					dataType: "json",
+					data: {
+						q: keyword[0],
+						lat: currPoint[0],
+						lng: currPoint[1]
+					}
+				}).done(function(data) {
+					console.log(data);
+					if(data.results == "none")
+						return;
+					console.log("TEST");
+					console.log(data.results.coordinates);
+					// Show a pin
+					var icon = L.icon({
+					  iconUrl: "/static/event_assets/icons/twitter.png",
+					  iconSize:     [20, 20], // size of the icon
+					  iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+					});
+
+					L.marker(data.results.coordinates, {icon: icon}).addTo(map).bindPopup(data.results.text);
+
+				});
 			}
 
 
@@ -625,7 +667,7 @@ $(function() {
 				stopover: false
 			});
 		}
-		/*
+		///*
 		var request = {
 			origin:location,
 			destination:location,
@@ -641,11 +683,13 @@ $(function() {
 			}
 		});
 		/**/
-		///*
+		/*
 		location = new google.maps.LatLng(53, -16);
+		selected_tags = ["test"];
 		var route_data = {"routes":[{"bounds":{"northeast":{"lat":53.3449932,"lng":-6.257216300000001},"southwest":{"lat":53.3414199,"lng":-6.2642802}},"copyrights":"Map data ©2014 Google","legs":[{"distance":{"text":"1.2 km","value":1236},"duration":{"text":"15 mins","value":910},"end_address":"2 Cecilia Street, Dublin, Ireland","end_location":{"lat":53.3449932,"lng":-6.2642802},"start_address":"41-43 Clarendon Street, Dublin, Ireland","start_location":{"lat":53.3416505,"lng":-6.2616875},"steps":[{"distance":{"text":"53 m","value":53},"duration":{"text":"1 min","value":36},"end_location":{"lat":53.34206649999999,"lng":-6.2613008},"html_instructions":"Head <b>northeast</b> on <b>Clarendon Street</b> toward <b>Coppinger Row</b>","polyline":{"points":"ihqdIp~ee@s@q@_@["},"start_location":{"lat":53.3416505,"lng":-6.2616875},"travel_mode":"WALKING"},{"distance":{"text":"87 m","value":87},"duration":{"text":"1 min","value":63},"end_location":{"lat":53.3417927,"lng":-6.260075},"html_instructions":"Turn <b>right</b> onto <b>Johnson's Court</b>","maneuver":"turn-right","polyline":{"points":"}jqdIb|ee@P{@Hg@BSBO?I@G?E?E?C?C@IJm@BM"},"start_location":{"lat":53.34206649999999,"lng":-6.2613008},"travel_mode":"WALKING"},{"distance":{"text":"26 m","value":26},"duration":{"text":"1 min","value":18},"end_location":{"lat":53.3420082,"lng":-6.259940100000001},"html_instructions":"Turn <b>left</b> onto <b>Grafton Street</b>","maneuver":"turn-left","polyline":{"points":"eiqdIntee@k@["},"start_location":{"lat":53.3417927,"lng":-6.260075},"travel_mode":"WALKING"},{"distance":{"text":"0.1 km","value":124},"duration":{"text":"1 min","value":87},"end_location":{"lat":53.3418047,"lng":-6.258103999999999},"html_instructions":"Turn <b>right</b> onto <b>Duke Street</b>","maneuver":"turn-right","polyline":{"points":"qjqdIrsee@L{BBa@Bq@R_D"},"start_location":{"lat":53.3420082,"lng":-6.259940100000001},"travel_mode":"WALKING"},{"distance":{"text":"3 m","value":3},"duration":{"text":"1 min","value":2},"end_location":{"lat":53.34177649999999,"lng":-6.258109600000001},"html_instructions":"Turn <b>right</b> onto <b>Dawson Street/R138</b>","maneuver":"turn-right","polyline":{"points":"giqdIbhee@B@"},"start_location":{"lat":53.3418047,"lng":-6.258103999999999},"travel_mode":"WALKING"},{"distance":{"text":"60 m","value":60},"duration":{"text":"1 min","value":48},"end_location":{"lat":53.3416771,"lng":-6.257216300000001},"html_instructions":"Turn <b>left</b> onto <b>Dawson Lane</b>","maneuver":"turn-left","polyline":{"points":"ciqdIdhee@RqD"},"start_location":{"lat":53.34177649999999,"lng":-6.258109600000001},"travel_mode":"WALKING"},{"distance":{"text":"29 m","value":29},"duration":{"text":"1 min","value":22},"end_location":{"lat":53.3414199,"lng":-6.2572306},"html_instructions":"Turn <b>right</b> to stay on <b>Dawson Lane</b>","maneuver":"turn-right","polyline":{"points":"ohqdIrbee@r@@"},"start_location":{"lat":53.3416771,"lng":-6.257216300000001},"travel_mode":"WALKING"},{"distance":{"text":"29 m","value":29},"duration":{"text":"1 min","value":19},"end_location":{"lat":53.3416771,"lng":-6.257216300000001},"html_instructions":"Make a <b>U-turn</b>","maneuver":"uturn-right","polyline":{"points":"{fqdItbee@s@A"},"start_location":{"lat":53.3414199,"lng":-6.2572306},"travel_mode":"WALKING"},{"distance":{"text":"60 m","value":60},"duration":{"text":"1 min","value":44},"end_location":{"lat":53.34177649999999,"lng":-6.258109600000001},"html_instructions":"Turn <b>left</b> to stay on <b>Dawson Lane</b>","maneuver":"turn-left","polyline":{"points":"ohqdIrbee@SpD"},"start_location":{"lat":53.3416771,"lng":-6.257216300000001},"travel_mode":"WALKING"},{"distance":{"text":"0.1 km","value":119},"duration":{"text":"1 min","value":81},"end_location":{"lat":53.3428275,"lng":-6.2577786},"html_instructions":"Turn <b>right</b> onto <b>Dawson Street/R138</b>","maneuver":"turn-right","polyline":{"points":"ciqdIdhee@CAyDy@IAIC"},"start_location":{"lat":53.34177649999999,"lng":-6.258109600000001},"travel_mode":"WALKING"},{"distance":{"text":"0.2 km","value":232},"duration":{"text":"3 mins","value":173},"end_location":{"lat":53.34435,"lng":-6.25943},"html_instructions":"Turn <b>left</b> onto <b>Nassau Street/R138</b><div style=\"font-size:0.9em\">Continue to follow R138</div>","maneuver":"turn-left","polyline":{"points":"uoqdIbfee@GFEFEHERKf@W`CGd@KRIHIFE@A?YAWAs@CI?K@QDKDKFSNGD"},"start_location":{"lat":53.3428275,"lng":-6.2577786},"travel_mode":"WALKING"},{"distance":{"text":"0.3 km","value":323},"duration":{"text":"4 mins","value":251},"end_location":{"lat":53.3441758,"lng":-6.2642789},"html_instructions":"Turn <b>left</b> onto <b>College Green/R137</b><div style=\"font-size:0.9em\">Continue to follow R137</div>","maneuver":"turn-left","polyline":{"points":"eyqdIlpee@?^AV@Z?P@VD|C@X?D@bAB~AB`ABj@CX@PBtCATBdAD|A"},"start_location":{"lat":53.34435,"lng":-6.25943},"travel_mode":"WALKING"},{"distance":{"text":"91 m","value":91},"duration":{"text":"1 min","value":66},"end_location":{"lat":53.3449932,"lng":-6.2642802},"html_instructions":"Turn <b>right</b> onto <b>Temple Lane South</b>","maneuver":"turn-right","polyline":{"points":"cxqdIvnfe@cCA]@"},"start_location":{"lat":53.3441758,"lng":-6.2642789},"travel_mode":"WALKING"}],"via_waypoint":[{"location":{"lat":53.3417593,"lng":-6.257955},"step_index":5,"step_interpolation":0.1730586706501407}]}],"overview_polyline":{"points":"ihqdIp~ee@sAmAZcBHu@?SLw@BMk@[P}CVqEB@RqDr@@s@ASpDCAcE{@ICGFKPQz@_@fDU\\OHgBGU@]J_@VGD?^?r@@h@H`GF`DBj@CXDfD@zAD|AcCA]@"},"summary":"R137","warnings":["Walking directions are in beta.    Use caution – This route may be missing sidewalks or pedestrian paths."],"waypoint_order":[]}],"status":"OK"};
 		processRouteData(route_data);
 		animated_map_init();
+		/**/
 	}
 
 	init();
