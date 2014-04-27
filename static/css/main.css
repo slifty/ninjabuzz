@@ -1,0 +1,200 @@
+* { border: 0px; margin: 0px; padding: 0px; }
+
+body {
+	background-color: #EBECED;
+}
+
+h1 {
+	font-family: Helvetica;
+	font-size: 110px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+}
+
+h2 {
+	font-family: Helvetica;
+	font-size: 36px;
+	font-weight: normal;
+	text-align: center;
+	margin-top: 15px;
+}
+
+h3 {
+	font-family: Helvetica;
+	font-size: 36px;
+	font-weight: normal;
+	font-style: italic;
+	text-align: center;
+	margin-top: 10px;
+}
+
+input.text {
+	border: 1px solid #B1B1B1;
+	padding: 10px;
+	width: 300px;
+	font-size: 24px;
+	margin-right: 20px;
+}
+
+input.button {
+	border: 0px;
+	border-bottom: 2px #548641 solid;
+	border-radius: 5px;
+	background: #6EB64A;
+	font-size: 24px;
+	color: #fff;
+	font-weight: normal;
+	padding: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.next {
+	width: 100px;
+}
+
+
+#scene-a {
+	background-image: url("../img/city_textured.png");
+	background-repeat: repeat-x;
+	background-position: 0px 100px;
+}
+
+#buzz-home {
+	height: 392px;
+	width: 376px;
+	margin: auto;
+}
+
+#scene-a-nav {
+	width: 446px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+
+
+#tags {
+	max-width: 600px;
+	margin: auto;
+	padding-right: 50px;
+	height: 300px;
+}
+
+#refresh-container {
+	max-width: 600px;
+	margin: auto;
+	margin-top: 50px;
+	position: relative;
+	padding-left: 50px;
+}
+#refresh-tags {
+	height: 41px;
+	width: 41px;
+	background: url("../img/refresh.png");
+	cursor: pointer;
+	position: absolute;
+	right: 0px;
+}
+
+.tag {
+	border: 0px;
+	border-bottom: 2px #8D8E8D solid;
+	border-radius: 5px;
+	background: #BABABB;
+	font-size: 24px;
+	color: #fff;
+	font-weight: normal;
+	padding: 5px;
+	cursor: pointer;
+	display: inline-block;
+	margin: 10px;
+}
+
+.tag.selected {
+	border-bottom: 2px #548641 solid;
+	background: #6EB64A;
+}
+
+#scene-b-nav {
+	width: 255px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+
+
+#venues {
+	max-width: 800px;
+	margin: 20px auto;
+	height: 400px;
+	overflow: auto;
+	border: 2px solid black;
+}
+
+.venue {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+.venue:before {  
+    content: "";  
+    display: block;  
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    background: rgba(0,255,255, 0.0);  
+    -moz-transition: background .3s linear;  
+    -webkit-transition: background .3s linear;  
+    -o-transition: background .3s linear;  
+    transition: background .3s linear;  
+}
+
+.venue.selected {
+}
+.venue.selected:before {  
+    background: rgba(0,255,255, 0.5);  
+}  
+
+#scene-c-nav {
+	width: 274px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+
+#story_container { width: 100%; max-width: 800px; margin: 50px auto;}
+#map_container{ position: relative; height: 478px; width: 100%; border: 1px #bbb solid; }
+#map { height: 100%; width: 100%; }
+#ur_map_container { position: absolute; top: 0px; right: 0px; z-index: 9999;  width: 75px; }
+#clock { text-align: center; padding: 3px; background: #FFF; font-size: 14px; border: 1px solid #bbb; border-top: 0px; border-right: 0px; font-family: "Benton Sans Bold", Arial, Helvetica, sans-serif; }
+#legend {}
+#legend .type { font-size: 10px; text-align: center; font-family: "Benton Sans Bold", Arial, Helvetica, sans-serif; }
+#legend .type.hired { background: #80CC80; display: none;}
+#legend .type.available { background: #CC8099; display: block; }
+
+#narrative { position: absolute; bottom: 0px; width: 100%; font-size: 14px; background: #fff; z-index: 9999; border-top: 1px solid #bbbbbb; }
+#narrative .details { text-align: center; padding: 5px; font-style: italic; vertical-align: middle; }
+#narrative .title {font-weight: bold; background: #DDDDDD; padding: 5px; font-size: 12px; }
+
+#timeline { border: 1px solid #BBBBBB; width: 100%; height: 20px; float: left; cursor: pointer; border-top: none;}
+#timeline .progress { background-color: #aa0016; height: 100%; width: 0%; }
+
+@media only screen and (min-width: 800px) and (max-width: 1080px) {
+}
+
+@media only screen and (min-width: 800px) and (max-width: 900px ) {
+	#narrative { font-size: 12px; }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 799px ) {
+	#map_container { height: 400px; }
+}
+
+@media only screen and (max-width: 499px) {
+	#map_container { height: 300px;}
+	#narrative { font-size: 13px; }
+}

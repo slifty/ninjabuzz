@@ -6,41 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Fv0VuL7I6_2FPy4phg3DBLFr5_u2JxM&sensor=false"></script>
     <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/lib/leaflet.min.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ url_for('static', filename='js/helpers.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ url_for('static', filename='js/leaflet_helpers.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript" charset="utf-8"></script>
 
   </head>
   <body>
 
     <section id="splash" class="scene">
-      <h1>Ninja Buzz</h1>
+      <h1>Make My Day</h1>
     </section>
 
     <section id="scene-a" class="scene hidden">
-      <h1>Where do you live?</h1>
-      <input type="" />
+      <h1>Hi!</h1>
+      <div id="buzz-home"><img src="{{ url_for('static', filename='img/Buzz_static.png') }}" /></div>
+      <h2>I'm Buzz.  I'll create a story for you today with ninja speed!</h2>
+      <h3>Tell me where you are?</h3>
+      <div id="scene-a-nav">
+        <form id="location-form">
+          <input id="location-text" type="text" class="text"/>
+          <input id="goto-b" type="submit" class="button next" value="Next" />
+        </form>
+      </div>
     </section>
 
     <section id="scene-b" class="scene hidden">
-      <h1>Select things below that you like plox!</h1>
+      <h1>So, what's your buzz?</h1>
+      <h3>Tell me what you're into.</h3>
+      <div id="refresh-container">
+        <div id="refresh-tags"></div>
+      </div>
       <div id="tags"></div>
-      <div id="refresh-tags">Refresh</div>
-      <div id="randomize-tags">Randomize</div>
-      <div id="goto-c">Next</div>
+      <div id="scene-b-nav">
+        <input id="randomize-tags" type="button" class="button" value="Randomize">
+        <input id="goto-c" type="button" class="button next" value="Go!">
+      </div>
     </section>
 
     <section id="scene-c" class="scene hidden">
-      <h1>What looks like something you would like to do today?</h1>
+      <h1>Hiiiyah!</h1>
+      <h3>What would you like to see today?</h3>
+      <div id="venues"></div>
+      <div id="scene-c-nav">
+        <input id="randomize-venues" type="button" class="button" value="Randomize">
+        <input id="goto-d" class="button next" value="Next">
+      </div>
     </section>
 
     <section id="scene-d" class="scene hidden">
-      <h1>Here's a map of your itinerary</h1>
+      <h1>Get Out There!</h1>
+      <h3>This is what you could do on your day!</h3>
+      <div id="story_container">
+        <div id="map_container">
+          <div id="ur_map_container">
+            <div id="clock"></div>
+          </div>
+          <div id="map"></div>
+          <div id="narrative">
+            <div class="title">Journey Notes</div>
+            <div class="details"></div>
+          </div>
+        </div>
+        <div id="timeline"></div>
+      </div>
     </section>
-
-    <footer>
-    </footer>
-
-
   </body>
 </html>
